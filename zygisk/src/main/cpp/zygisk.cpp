@@ -16,8 +16,10 @@
 
 #define DEX_PATH "/data/adb/modules/playintegrityfix/classes.dex"
 
-#define LIB_64 "/data/adb/modules/playintegrityfix/inject/arm64-v8a.so"
-#define LIB_32 "/data/adb/modules/playintegrityfix/inject/armeabi-v7a.so"
+#define LIB_ARM64 "/data/adb/modules/playintegrityfix/inject/arm64-v8a.so"
+#define LIB_ARM32 "/data/adb/modules/playintegrityfix/inject/armeabi-v7a.so"
+#define LIB_X86_64 "/data/adb/modules/playintegrityfix/inject/x86_64.so"
+#define LIB_X86 "/data/adb/modules/playintegrityfix/inject/x86.so"
 
 #define MODULE_PROP "/data/adb/modules/playintegrityfix/module.prop"
 #define DEFAULT_PIF "/data/adb/modules/playintegrityfix/pif.prop"
@@ -176,9 +178,13 @@ static void companion(int fd) {
 
     auto libFile = dir + "/libinject.so";
 #if defined(__aarch64__)
-    ok &= copyFile(LIB_64, libFile);
+    ok &= copyFile(LIB_ARM64, libFile);
 #elif defined(__arm__)
-    ok &= copyFile(LIB_32, libFile);
+    ok &= copyFile(LIB_ARM32, libFile);
+#elif defined(__x86_64__)
+    ok &= copyFile(LIB_X86_64, libFile);
+#elif defined(__i386__)
+    ok &= copyFile(LIB_X86, libFile);
 #endif
 
     LOGD("[COMPANION] copied inject lib");
