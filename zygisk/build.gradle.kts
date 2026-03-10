@@ -51,7 +51,9 @@ android {
             cmake {
                 abiFilters(
                     "arm64-v8a",
-                    "armeabi-v7a"
+                    "armeabi-v7a",
+                    "x86_64",
+                    "x86"
                 )
 
                 arguments(
